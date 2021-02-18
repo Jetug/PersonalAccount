@@ -1,0 +1,21 @@
+﻿@using PersonalAccount.Data.Models
+@model List<int>
+@{
+    ViewData["Title"] = "TestView";
+}
+
+<!DOCTYPE HTML>
+<head>
+
+</head>
+<body>
+    @{ 
+        foreach (var item in Model)
+        {
+            <div>
+                <h2>@item</h2>
+            </div>
+        }
+    }
+    <h1>SS</h1>
+</body>
