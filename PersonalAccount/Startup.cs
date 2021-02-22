@@ -31,15 +31,6 @@ namespace PersonalAccount
             //app.UseDefaultFiles();
             //app.UseStaticFiles();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        //await context.Response.WriteAsync("Ну здарова!");
-            //        //await context.Response.WriteAsync("Test!");
-            //    });
-            //});
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

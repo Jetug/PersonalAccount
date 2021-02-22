@@ -13,5 +13,10 @@ namespace PersonalAccount.Controllers
             List<int> nums = new List<int>{1, 2, 3, 4, 5};
             return View(nums);
         }
+
+        public ViewResult Info()
+        {
+            return View();
+        }
     }
 }
