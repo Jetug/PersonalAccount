@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PersonalAccount.Controllers
+namespace PersonalAccount.Data.Models
 {
     public class HomeController: Controller
     {
@@ -13,7 +13,6 @@ namespace PersonalAccount.Controllers
         {
             return View();
             //return Redirect("~/Account/List");
-
         }
 
         [HttpPost]
@@ -36,7 +35,7 @@ namespace PersonalAccount.Controllers
             string authData = $"Login: {login}   Password: {password}";
             //return Content(authData);
             if(login == "1" && password == "2")
-                return Redirect("~/Account/List");
+                return Redirect("~/Account/Info");
             return View("Index");
         }
     }

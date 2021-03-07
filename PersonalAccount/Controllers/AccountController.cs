@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PersonalAccount.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,40 @@ using System.Threading.Tasks;
 
 namespace PersonalAccount.Controllers
 {
-    public class AccountController: Controller
+    public class AccountController : Controller
     {
-        public ViewResult List()
+        List<Student> students = new List<Student>
         {
-            List<int> nums = new List<int>{1, 2, 3, 4, 5};
-            return View(nums);
+            new Student("Тест1", "Тестов", "Тестович", "Россия", 1, "Тестовая", "Тестовое"),
+            new Student("Тест2", "Тестов", "Тестович", "Россия", 2, "Тестовая", "Тестовое"),
+            new Student("Тест3", "Тестов", "Тестович", "Россия", 3, "Тестовая", "Тестовое"),
+            new Student("Тест4", "Тестов", "Тестович", "Россия", 4, "Тестовая", "Тестовое"),
+            new Student("Тест5", "Тестов", "Тестович", "Россия", 5, "Тестовая", "Тестовое"),
+        };
+
+        public ViewResult Students()
+        {
+            return View(students);
         }
 
-        public ViewResult Info()
+        [HttpPost]
+        public JsonResult GetInfo(int id)
         {
-            return View();
+            Student student = students[id];
+
+            return Json(student);
+        }
+
+        [HttpPost]
+        public JsonResult AjaxMethod(string name)
+        {
+            PersonModel person = new PersonModel
+            {
+                Name = name,
+                DateTime = DateTime.Now.ToString()
+            };
+
+            return Json(person);
         }
     }
 }
