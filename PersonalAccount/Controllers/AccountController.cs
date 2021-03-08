@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PersonalAccount.Data.Models;
+using PersonalAccount.Data.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,21 +26,17 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public JsonResult GetInfo(int id)
         {
-            Student student = students[id];
-
-            return Json(student);
-        }
-
-        [HttpPost]
-        public JsonResult AjaxMethod(string name)
-        {
-            PersonModel person = new PersonModel
+            Student student;
+            try
             {
-                Name = name,
-                DateTime = DateTime.Now.ToString()
-            };
-
-            return Json(person);
+                student = students[id];
+               
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                student = null;
+            }
+            return Json(student);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@using PersonalAccount.Data.Models
+﻿@using PersonalAccount.Data.Models.Entities
 @model List<Student>
 @{
     Layout = null;
@@ -151,16 +151,14 @@
                     <th scope="col">Страна</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="t_student">
                 @{
                     int i = 1;
                     foreach (var item in Model)
                     {
-                        <tr>
-                            <th scope="row">@i</th>
-                            <td>
-                                <a href="#tcard" id="ref">@item.Name</a>
-                            </td>
+                        <tr class="rowlink">
+                            <th class="id" scope="row">@i</th>
+                            <td>@item.Name</td>
                             <td>@item.Surname</td>
                             <td>@item.Patronymic</td>
                             <td>@item.Country</td>
@@ -176,7 +174,7 @@
         <div class="tcard" id="tcard">
             <div class="card">
                 <div class="card-body">
-                    <h5 id="cardName" class="card-title">Владимир Алексендрович Пупкин </h5>
+                    <h5 id="cardName" class="card-title"></h5>
                     <p id="cardCourse" class="card-text">Курс </p>
                     <p id="cardCath" class="card-text">Кафедра</p>
                     <p id="cardDep" class="card-text">Отделение</p>
@@ -196,7 +194,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Василий</th>
-                                <th scope="col">Пупкин</th>
+                                <th scope="col"></th>
                                 <th scope="col">Владимирович</th>
                             </tr>
                         </thead>
@@ -225,7 +223,6 @@
                 <br>
 
                 <div class="form-group">
-
                     <input type="text" name="login" class="form-control" id="formGroupExampleInput" placeholder="Введите Логин">
                 </div>
                 <br class="form-group">
@@ -244,22 +241,17 @@
 
         <script type="text/javascript">
             $(function () {
-                $("#ref").click(function () {
+                $('#t_student').on('click', '.rowlink', function () {
+                    document.location.href = "#tcard";
                     $.ajax({
                         type: "POST",
                         url: "/Account/GetInfo",
-                        data: { "id": 0 },
+                        data: { "id": $(this).find('.id').html() - 1},
                         success: function (strudent) {
                             $("#cardName").text(strudent.Name + ' ' + strudent.Surname + ' ' + strudent.Patronymic);
                             $("#cardCourse").text(strudent.Course);
                             $("#cardCath").text(strudent.Cathedra);
                             $("#cardDep").text(strudent.Cathedra);
-                        },
-                        faulure: function (response) {
-                            alert("ss")
-                        },
-                        error: function (response) {
-                            alert("ss")
                         },
                     });
                 });

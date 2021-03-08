@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PersonalAccount.Data.Models
+namespace PersonalAccount.Data.Models.Entities
 {
     public class Student
     {
@@ -12,10 +12,9 @@ namespace PersonalAccount.Data.Models
         public string Patronymic { get; set; }
         public string Country { get; set; }
         public int    Course { get; set; }
+        public string Group { get; set; }
         public string Cathedra { get; set; }
         public string Department { get; set; }
-
-       
 
         public Student(string name, string surname, string patronymic, string country, int course, string cathedra, string department)
         {
