@@ -12,31 +12,14 @@ namespace PersonalAccount.Data.Models
         public IActionResult Index()
         {
             return View();
-            //return Redirect("~/Account/List");
         }
 
         [HttpPost]
-        public IActionResult Login(string login, string password)
+        public bool Login(string login, string password)
         {
-            string authData = $"Login: {login}   Password: {password}";
-            //return Content(authData);
-            return Redirect("~/Account/List");
-        }
-
-        public IActionResult Check(string button)
-        {
-            //TempData["buttonval"] = "clicked";
-            //return RedirectToAction("Index");
-            return Redirect("~/Account/List");
-        }
-
-        public IActionResult HandleButtonClick(string login, string password)
-        {
-            string authData = $"Login: {login}   Password: {password}";
-            //return Content(authData);
-            if(login == "1" && password == "2")
-                return Redirect("~/Account/Info");
-            return View("Index");
+            if (login == "1" && password == "2")
+                return true;
+            return false;
         }
     }
 }
