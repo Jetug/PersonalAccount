@@ -10,11 +10,17 @@ namespace PersonalAccount.Models.Entities
         public string Name  { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }
+        public DateTime BirthDay { get; set; }
+        public string Sex { get; set; }
         public string Country { get; set; }
-        public int    Course { get; set; }
+        public string Institute { get; set; }
+
         public string Group { get; set; }
+        public int    Course { get; set; }
         public string Cathedra { get; set; }
         public string Department { get; set; }
+
+        public Contract Contract { get; set; }
         public Passport Passport { get; set; }
         public Visa Visa { get; set; }
 

@@ -14,19 +14,26 @@
     <style>
         #tcard {
             background: rgba(102, 102, 102, 0.5);
-            width: 600px;
-            height: 300px;
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+            display: none;
+        }
+
+        #card {
+            width: 400px;
+            height: 353px;
+            text-align: center;
+            padding: 0px;
+            border-radius: 8px;
+            color: rgba(48, 77, 152, 1);
+            position: absolute;
+            top: 0;
             right: 0;
             bottom: 0;
-            display: none;
-            text-align: center;
-            padding: 25px;
-            border: 2px solid #0000cc;
-            border-radius: 10px;
-            color: #0000cc;
+            left: 0;
             margin: auto;
             background: #fff;
         }
@@ -57,19 +64,45 @@
         #tcard:target {
             display: block;
         }
+
+        .tHead {
+            position: flex;
+            width: 1920px;
+            height: 60px;
+            background: #EEEFF1;
+            border: 1px solid #000000;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .line {
+            position: relative;
+            width: 400px;
+            height: 10px;
+            background: rgba(48, 77, 152, 1);
+        }
+
     </style>
 </head>
 <body style="background-color: whitesmoke;">
-   
+
+    <div class="form-group">
+        <input id="txt_search" type="text" name="search" class="form-control" placeholder="Поиск">
+        <input id="btn_search" type="button" class="btn btn-primary" value="Поиск">
+    </div>
+
     <div class="container">
         <table class="table table-striped">
-            <thead>
+            <thead class="tHead">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">№</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Фамилия</th>
                     <th scope="col">Отчество</th>
                     <th scope="col">Страна</th>
+                    <th scope="col">Дата рождения</th>
+                    <th scope="col">Пол</th>
+                    <th scope="col">Вуз</th>
                 </tr>
             </thead>
             <tbody id="t_student">
@@ -83,6 +116,9 @@
                             <td>@item.Surname</td>
                             <td>@item.Patronymic</td>
                             <td>@item.Country</td>
+                            <td>02.10.00</td>
+                            <td>М</td>
+                            <td>МГУТУ</td>
                         </tr>
                         i++;
                     }
@@ -90,19 +126,19 @@
             </tbody>
         </table>
 
-        <div class="tcard" id="tcard">
-            <div class="card">
-                <div class="card-body">
-                    <h5 id="cardName" class="card-title"></h5>
-                    <p id="cardCourse" class="card-text">Курс </p>
-                    <p id="cardCath" class="card-text">Кафедра</p>
-                    <p id="cardDep" class="card-text">Отделение</p>
-                    <a href="#documents" class="opencard">Документы</a>
-                    <a href="#" class="btn btn-danger" value="Отмена">отмена</a>
+        @*<div class="tcard" id="tcard">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 id="cardName" class="card-title"></h5>
+                        <p id="cardCourse" class="card-text">Курс </p>
+                        <p id="cardCath" class="card-text">Кафедра</p>
+                        <p id="cardDep" class="card-text">Отделение</p>
+                        <a href="#documents" class="opencard">Документы</a>
+                        <a href="#" class="btn btn-danger" value="Отмена">отмена</a>
+                    </div>
                 </div>
+            </div>*@
 
-            </div>
-        </div>
 
 
         <div class="documents" id="documents">
@@ -132,6 +168,86 @@
             </div>
         </div>
 
+
+        <div id="tcard">
+            <div id="card">
+
+                <h6 class="cardN">Документы</h6>x
+                <div class="line"></div>
+                <div class="cardD">
+                    <h5 align=" left">Паспорт</h5>
+
+                </div>
+                <!--     pass file       -->
+                <a href="pr1.zip" download="pr1.zip"><img src="PDF_Icon.png" align="right"></a>
+                <table id="Passport">
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="row">Номер:</th>
+                            <td id="d_pass"></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="col">Дата выдачи: </th>
+                            <td id="passDate"></td>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="line">
+                </div>
+
+
+                <h5 align=" left">Виза</h5>
+                <!--     visa file       -->
+
+                <a href="pr1.zip" download="pr1.zip"><img src="PDF_Icon.png" align="right"></a>
+                <table id="Visa">
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="row">Номер:</th>
+                            <td id="d_visa"></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Сроки выдачи: </th>
+                            <td>45739423</td>
+                        </tr>
+                    </thead>
+                </table>
+
+                <div class="line">
+                </div>
+
+                <!--     Договор file       -->
+                <a href="pr1.zip" download="pr1.zip"><img src="PDF_Icon.png" align="right"></a>
+                <h5 align=" left">Договор</h5>
+                <table id="Dogovor">
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th scope="row">Номер:</th>
+                            <td>
+                                45739423
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Дата Заключения: </th>
+                            <td>
+                                45739423
+                            </td>
+                        </tr>
+                    </thead>
+                </table>
+                <a href="#" class="btn btn-danger" value="Отмена">Отмена</a>
+                <div class="line">
+                </div>
+            </div>
+
+        </div>
+
+
         <script>
             $(function () {
                 $('#t_student').on('click', '.rowlink', function () {
@@ -140,18 +256,29 @@
                         type: "POST",
                         url: "/Account/GetInfo",
                         data: { "id": $(this).find('.id').html() - 1 },
-                        success: function (strudent) {
-                            $("#cardName").text(strudent.Name + ' ' + strudent.Surname + ' ' + strudent.Patronymic);
-                            $("#cardCourse").text(strudent.Course);
-                            $("#cardCath").text(strudent.Cathedra);
-                            $("#cardDep").text(strudent.Cathedra);
-                            $("#d_name").text(strudent.Name);
-                            $("#d_surname").text(strudent.Surname);
-                            $("#d_patr").text(strudent.Patronymic);
-                            $("#d_pass").text(strudent.Passport.Number);
-                            $("#d_visa").text(strudent.Visa.Number);
+                        success: function (student) {
+                            $("#cardName").text(student.Name + ' ' + student.Surname + ' ' + student.Patronymic);
+                            $("#cardCourse").text(student.Course);
+                            $("#cardCath").text(student.Cathedra);
+                            $("#cardDep").text(student.Cathedra);
+                            $("#d_name").text(student.Name);
+                            $("#d_surname").text(student.Surname);
+                            $("#d_patr").text(student.Patronymic);
+                            $("#d_pass").text(student.Passport.Number);
+                            $("#d_visa").text(student.Visa.Number);
                         },
                     });
+                });
+            });
+
+            $('#btn_search').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/Search",
+                    data: { "line": $('#txt_search').val()},
+                    success: function (s) {
+                        alert(s.Name)
+                    },
                 });
             });
         </script>

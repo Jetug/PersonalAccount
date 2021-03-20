@@ -7,11 +7,11 @@ namespace PersonalAccount.Models.Entities
 {
     public class Passport
     {
-        public Passport(int number)
+        public Passport(string number)
         {
             Number = number;
         }
 
-        public int Number { get; set; }
+        public string Number { get; set; }
     }
 }

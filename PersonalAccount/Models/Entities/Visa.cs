@@ -7,13 +7,15 @@ namespace PersonalAccount.Models.Entities
 {
     public class Visa
     {
-        public Visa(int number, DateTime date)
+        public Visa(int number, DateTime startDate, DateTime endDate)
         {
             Number = number;
-            Date = date;
+            StartDate = startDate;
+            EndDate = endDate;
         }
 
         public int Number { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

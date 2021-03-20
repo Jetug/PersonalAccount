@@ -21,21 +21,29 @@
             justify-content: space-between;
         }
 
+        &__right {
+            display: flex;
+            align-items: center;
+        }
+
         &__left {
             display: flex;
             align-items: center;
         }
 
         h1 {
-            margin-left: 50px;
+            margin-left: 10px;
         }
 
         .header {
             background-color: white;
-            padding: 41px 0 0 0;
+            padding: 21px 0 0 0;
+            background: linear-gradient(180deg, #304D98 0%, #2761AF 100%);
+            width: 1920px;
+            height: 65px;
         }
 
-        section::after {
+        section:after {
             content: "";
             display: table;
             clear: both;
@@ -88,6 +96,17 @@
             .close:hover {
                 background: #e6e6ff;
             }
+
+        
+
+        .cardN {
+            border-radius: 8px;
+            position: absolute;
+            text-align: center;
+            width: 400px;
+            height: 30px;
+            background: rgba(238, 239, 241, 1);
+        }
     </style>
 </head>
 <body>
@@ -95,7 +114,7 @@
         <div class="container">
             <div class="head ">
                 <div class="head__left">
-                    <h1>
+                    <h1 style=" color: deepskyblue;">
                         @ViewBag.Title
                     </h1>
                 </div>
