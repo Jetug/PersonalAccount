@@ -10,10 +10,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <style>
-
-        
     </style>
-
+    <div class="head__right auth">
+        <a href="#fogging">Авторизация</a>
+    </div>
 </head>
 
 <body>
@@ -24,6 +24,28 @@
     <a href="/Test/TestView">
         <input type="button" class="btn btn-primary" value="Test Page">
     </a>
+
+    <div id="fogging">
+        <div id="auth">
+            <br>
+            <div class="form-group">
+                <input type="text" name="login" class="form-control"
+                       id="login" placeholder="Введите Логин">
+                <br class="form-group">
+                <input type="text" name="password" class="form-control"
+                       id="password" placeholder="Введите Пароль">
+            </div>
+
+            <br>
+
+            <a href="#">
+                <input type="button" class="btn btn-danger" value="Отмена">
+            </a>
+            <input id="btn_login" type="button" class="btn btn-primary" value="Вход">
+
+            <p id="l_result"></p>
+        </div>
+    </div>
 
     <script>
         $(function () {
@@ -45,6 +67,5 @@
             });
         });
     </script>
-
 </body>
 </html>
