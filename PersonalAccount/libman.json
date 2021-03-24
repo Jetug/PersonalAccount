@@ -17,6 +17,10 @@
     {
       "library": "datatables@1.10.21",
       "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "popper.js@2.9.1",
+      "destination": "wwwroot/lib/popper.js/"
     }
   ]
 }
