@@ -104,6 +104,7 @@
                     <th scope="col">Дата рождения</th>
                     <th scope="col">Пол</th>
                     <th scope="col">Вуз</th>
+                    <th scope="col">Документы</th>
                 </tr>
             </thead>
             <tbody id="t_student">
@@ -111,15 +112,16 @@
                     int i = 1;
                     foreach (var item in Model)
                     {
-                        <tr class="rowlink">
+                        <tr >
                             <th class="id" scope="row">@i</th>
-                            <td>@item.Name</td>
-                            <td>@item.Surname</td>
-                            <td>@item.Patronymic</td>
-                            <td>@item.Country</td>
-                            <td>@item.BirthDay.ToString("dd.MM.yyyy")</td>
-                            <td>@item.Sex</td>
-                            <td>@item.Institute</td>
+                            <td class="rowlink">@item.Name</td>
+                            <td class="rowlink">@item.Surname</td>
+                            <td class="rowlink">@item.Patronymic</td>
+                            <td class="rowlink">@item.Country</td>
+                            <td class="rowlink">@item.BirthDay.ToString("dd.MM.yyyy")</td>
+                            <td class="rowlink">@item.Sex</td>
+                            <td class="rowlink">@item.Institute</td>
+                            <td class="doclink"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></td>
                         </tr>
                         i++;
                     }
@@ -129,14 +131,11 @@
 
 
 
-
-
         <div id="modal_auth" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Документы</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
                     <div class="modal-body">
                         <!--     pass file       -->
@@ -205,84 +204,20 @@
         </div>
 
 
-
-
-        <div id="tcard">
-            <div id="card">
-
-                <h6 class="cardN">Документы</h6>x
-                <div class="line"></div>
-                <div class="cardD">
-                    <h5 align=" left">Паспорт</h5>
-
-                </div>
-                <!--     pass file       -->
-                <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                <table id="Passport">
-                    <tbody>
-                    <thead>
-                        <tr>
-                            <th scope="row">Номер:</th>
-                            <td id="d_pass"></td>
-
-                        </tr>
-                        <tr>
-                            <th scope="col">Дата выдачи: </th>
-                            <td id="passDate"></td>
-                        </tr>
-                    </thead>
-                </table>
-
-                <div class="line">
-                </div>
-
-
-                <h5 align=" left">Виза</h5>
-                <!--     visa file       -->
-
-                <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                <table id="Visa">
-                    <tbody>
-                    <thead>
-                        <tr>
-                            <th scope="row">Номер:</th>
-                            <td id="d_visa"></td>
-                        </tr>
-                        <tr>
-                            <th scope="col">Сроки выдачи: </th>
-                            <td>45739423</td>
-                        </tr>
-                    </thead>
-                </table>
-
-                <div class="line">
-                </div>
-
-                <!--     Договор file       -->
-                <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                <h5 align=" left">Договор</h5>
-                <table id="Dogovor">
-                    <tbody>
-                    <thead>
-                        <tr>
-                            <th scope="row">Номер:</th>
-                            <td>
-                                45739423
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="col">Дата Заключения: </th>
-                            <td>
-                                45739423
-                            </td>
-                        </tr>
-                    </thead>
-                </table>
-                <a href="#" class="btn btn-danger" value="Отмена">Отмена</a>
-                <div class="line">
+        <div id="modal_edit" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Документы</h5>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
+                    </div>
                 </div>
             </div>
-
         </div>
 
 
@@ -293,11 +228,10 @@
             });
 
             $(function () {
-                $('#t_student').on('click', '.rowlink', function () {
-                    //document.location.href = "#tcard";
+                $('#t_student').on('click', '.doclink', function () {
 
-                    var myModal = new bootstrap.Modal(document.getElementById('modal_auth'))
-                    myModal.show()
+                    var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
+                    authWindow.show()
 
                     $.ajax({
                         type: "POST",
@@ -315,6 +249,14 @@
                             $("#d_visa").text(student.Visa.Number);
                         },
                     });
+                });
+            });
+
+            $(function () {
+                $('#t_student').on('click', '.rowlink', function () {
+                 
+                    var editWindow = new bootstrap.Modal(document.getElementById('modal_edit'))
+                    editWindow.show()
                 });
             });
 

@@ -31,6 +31,12 @@ namespace PersonalAccount.Data.Models
             return false;
         }
 
+        [HttpPost]
+        public void Test()
+        {
+
+        }
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
