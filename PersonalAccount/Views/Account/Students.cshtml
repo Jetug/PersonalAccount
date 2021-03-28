@@ -137,8 +137,8 @@
                     foreach (var item in Model)
                     {
                         <tr class="rowlink">
-                            <th class="id" scope="row">@i</th>
-                            <td>@item.Name</td>
+                            <th id="id" scope="row">@i</th>
+                            <td id="td_name">@item.Name</td>
                             <td>@item.Surname</td>
                             <td>@item.Patronymic</td>
                             <td>@item.Country</td>
@@ -233,6 +233,9 @@
                     </div>
                     <div class="modal-body">
                         <div>
+                            @*<p>Номер</p>
+                            <p id="m_id"></p>*@
+
                             <p>Имя</p>
                             <input id="name" type="text" class="form-control" align="right" />
 
@@ -344,16 +347,9 @@
                     $.ajax({
                         type: "POST",
                         url: "/Account/GetInfo",
-                        data: { "id": $(this).find('.id').html() - 1 },
+                        data: { "id": $(this).find('id').html() - 1 },
                         success: function (student) {
 
-                            $("#d_pass").text(student.Passport.Number);
-                            $("#passDate").text(formateDate(student.Passport.Date));
-                            $("#d_visa").text(student.Visa.Number);
-                            $("#visaStartDate").text(formateDate(student.Visa.StartDate));
-                            $("#visaEndDate").text(formateDate(student.Visa.EndDate));
-                            $("#contractNumber").text(student.Contract.Number);
-                            $("#contractDate").text(formateDate(student.Contract.Date));
                         },
                     });
                 });
@@ -380,6 +376,9 @@
                 return str
             }
 
+
+            let row = null
+
             $(function () {
                 $('#t_student').on('click', '.rowlink', function () {
 
@@ -387,11 +386,12 @@
                     editWindow.show()
 
                     //alert($(this).find('.id').html() - 1)
+                    row = $(this);
 
                     $.ajax({
                         type: "POST",
                         url: "/Account/GetInfo",
-                        data: { "id": $(this).find('.id').html() - 1 },
+                        data: { "id": $(this).find('#id').html() - 1 },
                         success: function (student) {
                             $("#name").val(student.Name);
                             $("#surname").val(student.Surname);
@@ -429,6 +429,7 @@
                     type: "POST",
                     url: "/Account/SaveChanges",
                     data: {
+                        //"Id": $('#m_id').text(),
                         "Name": $('#name').val(),
                         "Surname": $('#surname').val(),
                         "Patronymic": $('#patr').val(),
@@ -438,7 +439,8 @@
                         "Institute": $('#inst').val(),
                     },
                     success: function (s) {
-                        alert(s)
+                        alert($('#name').val())
+                        row.find("#td_name").text($('#name').val())
                     },
                 });
             });
