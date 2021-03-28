@@ -87,6 +87,30 @@
             height: 10px;
             background: rgba(48, 77, 152, 1);
         }
+
+
+        #main {
+            width: 1119px;
+            height: 150px;
+            overflow: hidden;
+        }
+
+            #main > div {
+                width: 150px;
+                height: 120px;
+                display: inline-block;
+            }
+
+        .block {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+        }
+
+
+        .modal-lg {
+            max-width: 80% !important;
+        }
     </style>
 </head>
 <body style="background-color: whitesmoke;">
@@ -104,7 +128,7 @@
                     <th scope="col">Дата рождения</th>
                     <th scope="col">Пол</th>
                     <th scope="col">Вуз</th>
-                    <th scope="col">Документы</th>
+                    @*<th scope="col">Документы</th>*@
                 </tr>
             </thead>
             <tbody id="t_student">
@@ -112,16 +136,16 @@
                     int i = 1;
                     foreach (var item in Model)
                     {
-                        <tr >
+                        <tr class="rowlink">
                             <th class="id" scope="row">@i</th>
-                            <td class="rowlink">@item.Name</td>
-                            <td class="rowlink">@item.Surname</td>
-                            <td class="rowlink">@item.Patronymic</td>
-                            <td class="rowlink">@item.Country</td>
-                            <td class="rowlink">@item.BirthDay.ToString("dd.MM.yyyy")</td>
-                            <td class="rowlink">@item.Sex</td>
-                            <td class="rowlink">@item.Institute</td>
-                            <td class="doclink"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></td>
+                            <td>@item.Name</td>
+                            <td>@item.Surname</td>
+                            <td>@item.Patronymic</td>
+                            <td>@item.Country</td>
+                            <td>@item.BirthDay.ToString("dd.MM.yyyy")</td>
+                            <td>@item.Sex</td>
+                            <td>@item.Institute</td>
+                            @*<td><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></td>*@
                         </tr>
                         i++;
                     }
@@ -129,17 +153,15 @@
             </tbody>
         </table>
 
-
-
-        <div id="modal_auth" class="modal" tabindex="-1">
+        <!--<div id="modal_auth" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Документы</h5>
                     </div>
                     <div class="modal-body">
-                        <!--     pass file       -->
-                        <h5 align=" left">Паспорт</h5>
+
+                        <!--<h5 align=" left">Паспорт</h5>
                         <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
                         <table id="Passport">
                             <tbody>
@@ -156,8 +178,7 @@
                             </thead>
                         </table>
 
-                        <!--     visa file       -->
-                        <h5 align=" left">Виза</h5>
+                        <!--<h5 align=" left">Виза</h5>
                         <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
                         <table id="Visa">
                             <tbody>
@@ -167,14 +188,17 @@
                                     <td id="d_visa"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="col">Сроки выдачи: </th>
-                                    <td>45739423</td>
+                                    <th scope="col">Дата выдачи: </th>
+                                    <td id="visaStartDate"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Дата окончания: </th>
+                                    <td id="visaEndDate"></td>
                                 </tr>
                             </thead>
                         </table>
 
 
-                        <!--     Договор file       -->
                         <h5 align=" left">Договор</h5>
                         <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
                         <table id="Dogovor">
@@ -182,14 +206,12 @@
                             <thead>
                                 <tr>
                                     <th scope="row">Номер:</th>
-                                    <td>
-                                        45739423
+                                    <td id="contractNumber">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="col">Дата Заключения: </th>
-                                    <td>
-                                        45739423
+                                    <td id="contractDate">
                                     </td>
                                 </tr>
                             </thead>
@@ -201,26 +223,112 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>-->
 
         <div id="modal_edit" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Документы</h5>
+                        <h5 class="modal-title">Данные студента</h5>
                     </div>
                     <div class="modal-body">
-                        
+                        <div>
+                            <p>Имя</p>
+                            <input id="name" type="text" class="form-control" align="right" />
+
+                            <p>Фамилия</p>
+                            <input id="surname" type="text" class="form-control" align="right" />
+
+                            <p>Отчество</p>
+                            <input id="patr" type="text" class="form-control" align="right" />
+
+                            <p>Страна</p>
+                            <input id="country" type="text" class="form-control" align="right" />
+
+                            <p>Дата рождения</p>
+                            <input id="birthDate" type="date" class="form-control align=" right"" />
+
+                            <p>Пол</p>
+                            <select id="sex" class="form-control" align="right">
+                                <option>Мужской</option>
+                                <option>Женский</option>
+                            </select>
+
+                            <p>Вуз</p>
+                            <input id="inst" type="text" class="form-control" />
+                        </div>
+                        <br />
+                        <div>
+                            <h4>Документы</h4>
+
+                            <!--     pass file       -->
+                            <h4 align=" left">Паспорт</h4>
+                            <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                            <table id="Passport">
+                                <tbody>
+                                <thead>
+                                    <tr>
+                                        <th scope="row">Номер:</th>
+                                        <td id="d_pass"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Дата выдачи: </th>
+                                        <td id="passDate"></td>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                            <!--     visa file       -->
+                            <h5 align=" left">Виза</h5>
+                            <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                            <table id="Visa">
+                                <tbody>
+                                <thead>
+                                    <tr>
+                                        <th scope="row">Номер:</th>
+                                        <td id="d_visa"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Дата выдачи: </th>
+                                        <td id="visaStartDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Дата окончания: </th>
+                                        <td id="visaEndDate"></td>
+                                    </tr>
+                                </thead>
+                            </table>
+
+
+                            <!--     Договор file       -->
+                            <h5 align=" left">Договор</h5>
+                            <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                            <table id="Dogovor">
+                                <tbody>
+                                <thead>
+                                    <tr>
+                                        <th scope="row">Номер:</th>
+                                        <td id="contractNumber">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">Дата Заключения: </th>
+                                        <td id="contractDate">
+                                        </td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
+                        @*<button id="btn_doc" type="button" class="btn btn-primary">Документы</button>*@
+                        <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
 
         <script>
             $(document).ready(function () {
@@ -238,25 +346,70 @@
                         url: "/Account/GetInfo",
                         data: { "id": $(this).find('.id').html() - 1 },
                         success: function (student) {
-                            $("#cardName").text(student.Name + ' ' + student.Surname + ' ' + student.Patronymic);
-                            $("#cardCourse").text(student.Course);
-                            $("#cardCath").text(student.Cathedra);
-                            $("#cardDep").text(student.Cathedra);
-                            $("#d_name").text(student.Name);
-                            $("#d_surname").text(student.Surname);
-                            $("#d_patr").text(student.Patronymic);
+
                             $("#d_pass").text(student.Passport.Number);
+                            $("#passDate").text(formateDate(student.Passport.Date));
                             $("#d_visa").text(student.Visa.Number);
+                            $("#visaStartDate").text(formateDate(student.Visa.StartDate));
+                            $("#visaEndDate").text(formateDate(student.Visa.EndDate));
+                            $("#contractNumber").text(student.Contract.Number);
+                            $("#contractDate").text(formateDate(student.Contract.Date));
                         },
                     });
                 });
             });
 
+            //$(function () {
+            //    $('#btn_doc').on('click', function () {
+            //        var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
+            //        authWindow.show()
+            //    });
+            //});
+
+            function formateDate(string) {
+                let arr = string.substr(0, 10).split("-")
+                let str = arr[2] + "." + arr[1] + "." + arr[0]
+
+                return str
+            }
+
+            function formateDate2(string) {
+                let arr = string.substr(0, 10).split("-")
+                let str = arr[0] + "." + arr[1] + "." + arr[2]
+
+                return str
+            }
+
             $(function () {
                 $('#t_student').on('click', '.rowlink', function () {
-                 
+
                     var editWindow = new bootstrap.Modal(document.getElementById('modal_edit'))
                     editWindow.show()
+
+                    //alert($(this).find('.id').html() - 1)
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Account/GetInfo",
+                        data: { "id": $(this).find('.id').html() - 1 },
+                        success: function (student) {
+                            $("#name").val(student.Name);
+                            $("#surname").val(student.Surname);
+                            $("#patr").val(student.Patronymic);
+                            $("#country").val(student.Country);
+                            $("#birthDate").val(student.BirthDay.substr(0, 10));
+                            $("#sex").val(student.Sex);
+                            $("#inst").val(student.Institute);
+
+                            $("#d_pass").text(student.Passport.Number);
+                            $("#passDate").text(formateDate(student.Passport.Date));
+                            $("#d_visa").text(student.Visa.Number);
+                            $("#visaStartDate").text(formateDate(student.Visa.StartDate));
+                            $("#visaEndDate").text(formateDate(student.Visa.EndDate));
+                            $("#contractNumber").text(student.Contract.Number);
+                            $("#contractDate").text(formateDate(student.Contract.Date));
+                        },
+                    });
                 });
             });
 
@@ -267,6 +420,25 @@
                     data: { "line": $('#txt_search').val() },
                     success: function (s) {
                         alert(s.Name)
+                    },
+                });
+            });
+
+            $('#btn_save').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/SaveChanges",
+                    data: {
+                        "Name": $('#name').val(),
+                        "Surname": $('#surname').val(),
+                        "Patronymic": $('#patr').val(),
+                        "Country": $('#country').val(),
+                        "BirthDate": $('#birthDate').val(),
+                        "Sex": $('#sex').val(),
+                        "Institute": $('#inst').val(),
+                    },
+                    success: function (s) {
+                        alert(s)
                     },
                 });
             });

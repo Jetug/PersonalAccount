@@ -20,18 +20,23 @@ namespace PersonalAccount.Controllers
     {
         readonly List<Student> students = new List<Student>
         {
-            new Student("Тест1", "Тестов", null, "Россия", 1, "105", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3))),
-            new Student("Тест2", "Тестов", null, "Россия", 2, "205", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3))),
-            new Student("Тест3", "Тестов", "Тестович", "Украина", 3, "305", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3))),
-            new Student("Тест4", "Тестов", "Тестович", "Россия", 4, "405", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3))),
-            new Student("Тест5", "Тестов", "Тестович", "Россия", 5, "505", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3))),
+            new Student("Тест1", "Тестов", null,       new DateTime(2001,10,10), "Мужской", "Россия",  "МГУТУ", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3)), new Contract(176453273,new DateTime(2010,2,1))),
+            new Student("Тест2", "Тестов", null,       new DateTime(2001,10,10), "Мужской", "Россия",  "МГУТУ", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3)), new Contract(176453273,new DateTime(2010,2,1))),
+            new Student("Тест3", "Тестов", "Тестович", new DateTime(2001,10,10), "Женский", "Украина", "МГУТУ", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3)), new Contract(176453273,new DateTime(2010,2,1))),
+            new Student("Тест4", "Тестов", "Тестович", new DateTime(2001,10,10), "Женский", "Россия",  "МГУТУ", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3)), new Contract(176453273,new DateTime(2010,2,1))),
+            new Student("Тест5", "Тестов", "Тестович", new DateTime(2001,10,10), "Мужской", "Россия",  "МГУТУ", new Passport("1234567890"), new Visa(0987654321, new DateTime(18,2,3), new DateTime(22,2,3)), new Contract(176453273,new DateTime(2010,2,1))),
         };
 
         public AccountController()
         {
             for(int i = 1; i <= 100; i++)
             {
-                students.Add(new Student($"Тест{i}", $"Тестов{i}", $"Тестович{i}", "Россия", 1, "105", "Тестовая", "Тестовое", new Passport("1234567890"), new Visa(0987654321, new DateTime(18, 2, 3), new DateTime(22, 2, 3))));
+                students.Add(new Student(
+                    $"Тест{i}", $"Тестов{i}", $"Тестович{i}", new DateTime(2001,10,10), "Мужской", "Россия", "МГУТУ",
+                        new Passport("1234567890"), 
+                        new Visa(0987654321, new DateTime(18, 2, 3), new DateTime(22, 2, 3)),
+                        new Contract(176453273, new DateTime(2010, 2, 1))
+                    ));
             }
         }
 
@@ -89,6 +94,17 @@ namespace PersonalAccount.Controllers
             return await Download("wwwroot/Data/Documents/Contracts/Договор.pdf", "Договор.pdf");
         }
 
+        //[Authorize]
+        [HttpPost]
+        #pragma warning disable CS1998                                                                                                        // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
+        public async Task<bool> SaveChanges(Student student)
+        {
+
+            return true;
+            return false;
+        }
+        #pragma warning restore CS1998
+
         private async Task<FileResult> Download(string path, string name)
         {
             return await Task.Run(() =>
@@ -105,7 +121,14 @@ namespace PersonalAccount.Controllers
                     feature.Abort();
                 }
                 return file;
-        });
+            });
         }
+    }
+
+    public class Test
+    {
+        public int A { get; set; }
+        public string B { get; set; }
+        public string C { get; set; }
     }
 }

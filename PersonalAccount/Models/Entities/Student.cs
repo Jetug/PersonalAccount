@@ -15,10 +15,10 @@ namespace PersonalAccount.Models.Entities
         public string Country { get; set; }
         public string Institute { get; set; }
 
-        public string Group { get; set; }
-        public int    Course { get; set; }
-        public string Cathedra { get; set; }
-        public string Department { get; set; }
+        //public string Group { get; set; }
+        //public int    Course { get; set; }
+        //public string Cathedra { get; set; }
+        //public string Department { get; set; }
 
         public Contract Contract { get; set; }
         public Passport Passport { get; set; }
@@ -28,16 +28,17 @@ namespace PersonalAccount.Models.Entities
         {
         }
 
-        public Student(string name, string surname, string patronymic, string country, int course, string group, string cathedra, string department, Passport passport, Visa visa)
+        public Student(string name, string surname, string patronymic, DateTime birthDay, string sex, string country, string institute,
+             Passport passport, Visa visa, Contract contract)
         {
             Name = name;
             Surname = surname;
             Patronymic = patronymic;
+            BirthDay = birthDay;
+            Sex = sex;
             Country = country;
-            Group = group;
-            Course = course;
-            Cathedra = cathedra;
-            Department = department;
+            Institute = institute;
+            Contract = contract;
             Passport = passport;
             Visa = visa;
         }
