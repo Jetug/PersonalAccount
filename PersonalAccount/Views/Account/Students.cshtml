@@ -413,16 +413,16 @@
                 });
             });
 
-            $('#btn_search').click(function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/Account/Search",
-                    data: { "line": $('#txt_search').val() },
-                    success: function (s) {
-                        alert(s.Name)
-                    },
-                });
-            });
+            //$('#btn_search').click(function () {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Account/Search",
+            //        data: { "line": $('#txt_search').val() },
+            //        success: function (s) {
+            //            alert(s.Name)
+            //        },
+            //    });
+            //});
 
             $('#btn_save').click(function () {
                 $.ajax({
@@ -439,7 +439,7 @@
                         "Institute": $('#inst').val(),
                     },
                     success: function (s) {
-                        alert($('#name').val())
+                        //alert($('#name').val())
                         row.find("#td_name").text($('#name').val())
                     },
                 });
