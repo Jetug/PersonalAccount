@@ -77,35 +77,69 @@ namespace PersonalAccount.Controllers
         [HttpGet]
         public async Task<FileResult> DownloadPassport()
         {
-             return await Download("wwwroot/Data/Documents/Passports/Паспорт.pdf", "Паспорт.pdf");
+             return await DownloadAsync("wwwroot/Data/Documents/Passports/Паспорт.pdf", "Паспорт.pdf");
         }
 
         [Authorize]
         [HttpGet]
         public async Task<FileResult> DownloadVisa()
         {
-            return await Download("wwwroot/Data/Documents/Visas/Виза.pdf", "Виза.pdf");
+            return await DownloadAsync("wwwroot/Data/Documents/Visas/Виза.pdf", "Виза.pdf");
         }
 
         [Authorize]
         [HttpGet]
         public async Task<FileResult> DownloadContract()
         {
-            return await Download("wwwroot/Data/Documents/Contracts/Договор.pdf", "Договор.pdf");
+            return await DownloadAsync("wwwroot/Data/Documents/Contracts/Договор.pdf", "Договор.pdf");
         }
+
 
         //[Authorize]
         [HttpPost]
-        #pragma warning disable CS1998                                                                                                        // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
+        public void UploadPassport(IFormFile file, int studentId)
+        {
+            if(file != null)
+            {
+                FileUploader.UploadPassport(file, studentId);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public void UploadVisa(IFormFile file, int studentId)
+        {
+            if (file != null)
+            {
+                FileUploader.UploadPassport(file, studentId);
+            }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public void UploadContract(IFormFile file, int studentId)
+        {
+            if (file != null)
+            {
+                FileUploader.UploadPassport(file, studentId);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+#pragma warning disable CS1998                                                                                                        // В асинхронном методе отсутствуют операторы await, будет выполнен синхронный метод
         public async Task<bool> SaveChanges(Student student)
         {
-
             return true;
-            return false;
         }
-        #pragma warning restore CS1998
+#pragma warning restore CS1998
 
-        private async Task<FileResult> Download(string path, string name)
+        private FileResult GetFileResult(byte[] fileBytes, string name)
+        {
+            return File(fileBytes, "application/force-download", name);
+        }
+
+        private async Task<FileResult> DownloadAsync(string path, string name)
         {
             return await Task.Run(() =>
             {
@@ -123,12 +157,5 @@ namespace PersonalAccount.Controllers
                 return file;
             });
         }
-    }
-
-    public class Test
-    {
-        public int A { get; set; }
-        public string B { get; set; }
-        public string C { get; set; }
     }
 }

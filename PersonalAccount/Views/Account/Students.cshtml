@@ -232,11 +232,11 @@
                         <h5 class="modal-title">Данные студента</h5>
                     </div>
                     <div class="modal-body">
-                        <div>
+                        <!--<div>-->
                             @*<p>Номер</p>
                             <p id="m_id"></p>*@
 
-                            <p>Имя</p>
+                            <!--<p>Имя</p>
                             <input id="name" type="text" class="form-control" align="right" />
 
                             <p>Фамилия</p>
@@ -260,14 +260,21 @@
                             <p>Вуз</p>
                             <input id="inst" type="text" class="form-control" />
                         </div>
-                        <br />
+                        <br />-->
                         <div>
                             <h4>Документы</h4>
 
                             <!--     pass file       -->
-                            <h4 align=" left">Паспорт</h4>
+                            <h4 align="left">Паспорт</h4>
                             <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                            <table id="Passport">
+
+                            @*<form action="/Account/UploadPassport" method="post" align="right">*@
+                                <input id="passFile" type="file" name="file"/>
+                                <input id="studentId" type="number" name="studentId" style="display: none;">
+                                <input id="passPostBtn" type="button" value="Загрузить"/>
+                            @*</form>*@
+
+                            <table id="Passport" >
                                 <tbody>
                                 <thead>
                                     <tr>
@@ -325,7 +332,6 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @*<button id="btn_doc" type="button" class="btn btn-primary">Документы</button>*@
                         <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
                         <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
                     </div>
@@ -355,13 +361,6 @@
                 });
             });
 
-            //$(function () {
-            //    $('#btn_doc').on('click', function () {
-            //        var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
-            //        authWindow.show()
-            //    });
-            //});
-
             function formateDate(string) {
                 let arr = string.substr(0, 10).split("-")
                 let str = arr[2] + "." + arr[1] + "." + arr[0]
@@ -378,6 +377,7 @@
 
 
             let row = null
+            let studentId = 0
 
             $(function () {
                 $('#t_student').on('click', '.rowlink', function () {
@@ -387,12 +387,15 @@
 
                     //alert($(this).find('.id').html() - 1)
                     row = $(this);
+                    studentId = $(this).find('#id').html() - 1;
 
                     $.ajax({
                         type: "POST",
                         url: "/Account/GetInfo",
-                        data: { "id": $(this).find('#id').html() - 1 },
+                        data: { "id": studentId },
                         success: function (student) {
+                            $("#studentId").val(studentId);
+
                             $("#name").val(student.Name);
                             $("#surname").val(student.Surname);
                             $("#patr").val(student.Patronymic);
@@ -413,23 +416,11 @@
                 });
             });
 
-            //$('#btn_search').click(function () {
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "/Account/Search",
-            //        data: { "line": $('#txt_search').val() },
-            //        success: function (s) {
-            //            alert(s.Name)
-            //        },
-            //    });
-            //});
-
             $('#btn_save').click(function () {
                 $.ajax({
                     type: "POST",
                     url: "/Account/SaveChanges",
                     data: {
-                        //"Id": $('#m_id').text(),
                         "Name": $('#name').val(),
                         "Surname": $('#surname').val(),
                         "Patronymic": $('#patr').val(),
@@ -439,9 +430,27 @@
                         "Institute": $('#inst').val(),
                     },
                     success: function (s) {
-                        //alert($('#name').val())
                         row.find("#td_name").text($('#name').val())
                     },
+                });
+            });
+
+            var input = document.getElementById('passFile');
+
+            $('#passPostBtn').click(function () {
+
+                var formData = new FormData();
+                formData.append('file', $("#passFile")[0].files[0])
+                formData.append('studentId', studentId)
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/UploadPassport",
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    data: formData,
                 });
             });
         </script>
