@@ -83,9 +83,9 @@
 
         .line {
             position: relative;
-            width: 400px;
-            height: 10px;
-            background: rgba(48, 77, 152, 1);
+            width: 450px;
+            height: 01px;
+            background: rgb(178,178,183);
         }
 
 
@@ -110,6 +110,16 @@
 
         .modal-lg {
             max-width: 80% !important;
+        }
+        .container{
+        padding: 15px;
+            position: absolute;
+            top: 71px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        background-color: white;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
         }
     </style>
 </head>
@@ -262,39 +272,40 @@
                         </div>
                         <br />-->
                         <div>
-                            <h4>Документы</h4>
+                            
 
                             <!--     pass file       -->
                             <h4 align="left">Паспорт</h4>
                             <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
 
                             @*<form action="/Account/UploadPassport" method="post" align="right">*@
-                                <input id="passFile" type="file" name="file"/>
-                                <input id="studentId" type="number" name="studentId" style="display: none;">
-                                <input id="passPostBtn" type="button" value="Загрузить"/>
+                            <input id="passFile" type="file" name="file"/>
+                            <input id="studentId" type="number" name="studentId" style="display: none;">
+                            <input id="passPostBtn" type="button" value="Загрузить"/>
                             @*</form>*@
 
                             <table id="Passport" >
                                 <tbody>
                                 <thead>
-                                    <tr>
-                                        <th scope="row">Номер:</th>
-                                        <td id="d_pass"></td>
+                                <tr>
+                                    <th scope="row">Номер:</th>
+                                    <td id="d_pass"></td>
 
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Дата выдачи: </th>
-                                        <td id="passDate"></td>
-                                    </tr>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Дата выдачи: </th>
+                                    <td id="passDate"></td>
+                                </tr>
                                 </thead>
                             </table>
 
                             <!--     visa file       -->
-                            <h5 align=" left">Виза</h5>
-                            <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                            <table id="Visa">
-                                <tbody>
-                                <thead>
+                            <div class="line">
+                                <h4 align=" left">Виза</h4>
+                                <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                                <table id="Visa">
+                                    <tbody>
+                                    <thead>
                                     <tr>
                                         <th scope="row">Номер:</th>
                                         <td id="d_visa"></td>
@@ -307,35 +318,37 @@
                                         <th scope="col">Дата окончания: </th>
                                         <td id="visaEndDate"></td>
                                     </tr>
-                                </thead>
-                            </table>
+                                    </thead>
+                                </table>
 
 
-                            <!--     Договор file       -->
-                            <h5 align=" left">Договор</h5>
-                            <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-                            <table id="Dogovor">
-                                <tbody>
-                                <thead>
-                                    <tr>
-                                        <th scope="row">Номер:</th>
-                                        <td id="contractNumber">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Дата Заключения: </th>
-                                        <td id="contractDate">
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
+                                <!--     Договор file       -->
+                                <div class="line">
+                                    <h4 align=" left">Договор</h4>
+                                    <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                                    <table id="Dogovor">
+                                        <tbody>
+                                        <thead>
+                                        <tr>
+                                            <th scope="row">Номер:</th>
+                                            <td id="contractNumber">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Дата Заключения: </th>
+                                            <td id="contractDate">
+                                            </td>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                    
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
-                        <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
-                    </div>
-                </div>
+                        <div class="modal-footer">
+                                                <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
+                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
+                                            </div>
             </div>
         </div>
 
