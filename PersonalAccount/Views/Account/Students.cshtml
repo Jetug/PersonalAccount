@@ -121,6 +121,37 @@
         background-color: white;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
         }
+        .DownLoadPass{
+                    width: 50px;
+                    height: 60px;
+        position: absolute;
+            top: 10px;
+            left: 233px;
+            right: 0;
+            bottom: 0px;
+
+        }
+        .DownLoadVisa{
+            width: 50px;
+            height: 60px;
+            position: absolute;
+            top: 10px;
+            left: 215px;
+            right: 0;
+            bottom: 0px;
+        
+                 }
+                 
+        .DownLoadDogovor{
+            width: 50px;
+            height: 60px;
+            position: absolute;
+            top: 10px;
+            left: 227px;
+            right: 0;
+            bottom: 0px;
+        
+                 }
     </style>
 </head>
 <body style="background-color: whitesmoke;">
@@ -140,7 +171,7 @@
                     <th scope="col">Вуз</th>
                     @*<th scope="col">Документы</th>*@
                 </tr>
-            </thead>
+                </thead>
             <tbody id="t_student">
                 @{
                     int i = 1;
@@ -243,47 +274,47 @@
                     </div>
                     <div class="modal-body">
                         <!--<div>-->
-                            @*<p>Номер</p>
+                        @*<p>Номер</p>
                             <p id="m_id"></p>*@
 
-                            <!--<p>Имя</p>
-                            <input id="name" type="text" class="form-control" align="right" />
+                        <!--<p>Имя</p>
+                        <input id="name" type="text" class="form-control" align="right" />
 
-                            <p>Фамилия</p>
-                            <input id="surname" type="text" class="form-control" align="right" />
+                        <p>Фамилия</p>
+                        <input id="surname" type="text" class="form-control" align="right" />
 
-                            <p>Отчество</p>
-                            <input id="patr" type="text" class="form-control" align="right" />
+                        <p>Отчество</p>
+                        <input id="patr" type="text" class="form-control" align="right" />
 
-                            <p>Страна</p>
-                            <input id="country" type="text" class="form-control" align="right" />
+                        <p>Страна</p>
+                        <input id="country" type="text" class="form-control" align="right" />
 
-                            <p>Дата рождения</p>
-                            <input id="birthDate" type="date" class="form-control align=" right"" />
+                        <p>Дата рождения</p>
+                        <input id="birthDate" type="date" class="form-control align=" right"" />
 
-                            <p>Пол</p>
-                            <select id="sex" class="form-control" align="right">
-                                <option>Мужской</option>
-                                <option>Женский</option>
-                            </select>
+                        <p>Пол</p>
+                        <select id="sex" class="form-control" align="right">
+                            <option>Мужской</option>
+                            <option>Женский</option>
+                        </select>
 
-                            <p>Вуз</p>
-                            <input id="inst" type="text" class="form-control" />
+                        <p>Вуз</p>
+                        <input id="inst" type="text" class="form-control" />
                         </div>
                         <br />-->
                         <div>
                             
 
                             <!--     pass file       -->
-                            <h4 align="left">Паспорт</h4>
+                            <h4 align="left"><i>Паспорт</i></h4>
                             <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-
+                            <div class="DownLoadPass">
                             @*<form action="/Account/UploadPassport" method="post" align="right">*@
                             <input id="passFile" type="file" name="file"/>
                             <input id="studentId" type="number" name="studentId" style="display: none;">
                             <input id="passPostBtn" type="button" value="Загрузить"/>
                             @*</form>*@
-
+                                </div>
                             <table id="Passport" >
                                 <tbody>
                                 <thead>
@@ -301,7 +332,14 @@
 
                             <!--     visa file       -->
                             <div class="line">
-                                <h4 align=" left">Виза</h4>
+                                <div class="DownLoadVisa">
+                                    @*<form action="/Account/UploadPassport" method="post" align="right">*@
+                                    <input id="passFile" type="file" name="file"/>
+                                    <input id="studentId" type="number" name="studentId" style="display: none;">
+                                    <input id="passPostBtn" type="button" value="Загрузить"/>
+                                    @*</form>*@
+                                    </div>
+                                <h4 align=" left"><i>Виза</i></h4>
                                 <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
                                 <table id="Visa">
                                     <tbody>
@@ -324,7 +362,14 @@
 
                                 <!--     Договор file       -->
                                 <div class="line">
-                                    <h4 align=" left">Договор</h4>
+                                    <div class="DownLoadDogovor">
+                                        @*<form action="/Account/UploadPassport" method="post" align="right">*@
+                                        <input id="passFile" type="file" name="file"/>
+                                        <input id="studentId" type="number" name="studentId" style="display: none;">
+                                        <input id="passPostBtn" type="button" value="Загрузить"/>
+                                        @*</form>*@
+                                        </div>
+                                    <h4 align=" left"><i>Договор</i></h4>
                                     <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
                                     <table id="Dogovor">
                                         <tbody>
@@ -345,11 +390,12 @@
                             </div>
                     
                         </div>
-                        <div class="modal-footer">
-                                                <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
-                                                <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
-                                            </div>
-            </div>
+
+                    </div>
+                                            <div class="modal-footer">
+                                                                    <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
+                                                                    <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Отмена</button>
+                                                                </div>
         </div>
 
         <script>
