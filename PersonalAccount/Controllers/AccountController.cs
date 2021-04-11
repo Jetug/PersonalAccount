@@ -99,29 +99,29 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadPassport(IFormFile file, int studentId)
         {
-            if(file != null)
+            if (file != null)
             {
                 FileUploader.UploadPassport(file, studentId);
             }
         }
 
-        [Authorize]
-        [HttpGet]
+        //[Authorize]
+        [HttpPost]
         public void UploadVisa(IFormFile file, int studentId)
         {
             if (file != null)
             {
-                FileUploader.UploadPassport(file, studentId);
+                FileUploader.UploadVisa(file, studentId);
             }
         }
 
-        [Authorize]
-        [HttpGet]
+        //[Authorize]
+        [HttpPost]
         public void UploadContract(IFormFile file, int studentId)
         {
             if (file != null)
             {
-                FileUploader.UploadPassport(file, studentId);
+                FileUploader.UploadContract(file, studentId);
             }
         }
 
