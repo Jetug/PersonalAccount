@@ -315,6 +315,8 @@
                         <div class="DownLoadPass">
                             <input id="passFile" type="file" name="file" />
                             <input id="passPostBtn" type="button" value="Загрузить" />
+
+                            <small id="passportUploadDate"></small>
                         </div>
                         <table id="Passport">
                             <tbody>
@@ -338,6 +340,8 @@
                             <div class="DownLoadVisa">
                                 <input id="visaFile" type="file" name="file" />
                                 <input id="visaPostBtn" type="button" value="Загрузить" />
+
+                                <small id="visaUploadDate"></small>
                             </div>
 
                             <table id="Visa">
@@ -367,6 +371,8 @@
                                 <div class="DownLoadDogovor">
                                     <input id="contFile" type="file" name="file" />
                                     <input id="contPostBtn" type="button" value="Загрузить" />
+
+                                    <small id="contractUploadDate"></small>
                                 </div>
 
                                 <table id="Dogovor">
@@ -395,52 +401,54 @@
         </div>
     </div>
     <script>
+        let row = null
+        let studentId = 0
+
         $(document).ready(function () {
             $('#sTable').DataTable();
         });
 
-        $(function () {
-            $('#t_student').on('click', '.doclink', function () {
+        //$(function () {
+        //    $('#t_student').on('click', '.doclink', function () {
 
-                var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
-                authWindow.show()
+        //        var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
+        //        authWindow.show()
 
-                $.ajax({
-                    type: "POST",
-                    url: "/Account/GetInfo",
-                    data: { "id": $(this).find('id').html() - 1 },
-                    success: function (student) {
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "/Account/GetInfo",
+        //            data: { "id": $(this).find('id').html() - 1 },
+        //            success: function (student) {
 
-                    },
-                });
-            });
-        });
+        //            },
+        //        });
 
-        function formateDate(string) {
-            let arr = string.substr(0, 10).split("-")
-            let str = arr[2] + "." + arr[1] + "." + arr[0]
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/Account/GetUploadingDates",
+        //            data: { "id": $(this).find('id').html() - 1 },
+        //            success: function (student) {
 
-            return str
-        }
-
-        function formateDate2(string) {
-            let arr = string.substr(0, 10).split("-")
-            let str = arr[0] + "." + arr[1] + "." + arr[2]
-
-            return str
-        }
+        //            },
+        //        });
+        //    });
+        //});
 
 
-        let row = null
-        let studentId = 0
+
+
+
 
         $(function () {
             $('#t_student').on('click', '.rowlink', function () {
 
+                clearModal()
+
                 var editWindow = new bootstrap.Modal(document.getElementById('modal_edit'))
                 editWindow.show()
 
-                //alert($(this).find('.id').html() - 1)
+               
+
                 row = $(this);
                 studentId = $(this).find('#id').html() - 1;
 
@@ -468,8 +476,34 @@
                         $("#contractDate").val(student.Contract.Date.substr(0, 10));
                     },
                 });
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Account/GetUploadingDates",
+                    data: { "studentId": studentId },
+                    success: function (dates) {
+                        const nullFileStr = "Файл не загружен"
+                        $("#passportUploadDate").text(dates[0] != "" ? dates[0] : nullFileStr)
+                        $("#visaUploadDate").text(dates[1] != "" ? dates[1] : nullFileStr)
+                        $("#contractUploadDate").text(dates[2] != "" ? dates[2] : nullFileStr)
+                    },
+                });
             });
         });
+
+        function clearModal() {
+            $("#d_pass").val("")
+            $("#passDate").val("")
+            $("#d_visa").val("")
+            $("#visaStartDate").val("")
+            $("#visaEndDate").val("")
+            $("#contractNumber").val("")
+            $("#contractDate").val("")
+
+            $("#passportUploadDate").text("q")
+            $("#visaUploadDate").text("w")
+            $("#contractUploadDate").text("e")
+        }
 
         var input = document.getElementById('passFile');
 
@@ -491,6 +525,7 @@
                 },
             });
         });
+
         $('#passPostBtn').click(uploadPassport);
         $('#visaPostBtn').click(uploadVisa);
         $('#contPostBtn').click(uploadContract);
@@ -542,6 +577,21 @@
                 dataType: 'json',
                 data: formData,
             });
+        }
+
+
+        function formateDate(string) {
+            let arr = string.substr(0, 10).split("-")
+            let str = arr[2] + "." + arr[1] + "." + arr[0]
+
+            return str
+        }
+
+        function formateDate2(string) {
+            let arr = string.substr(0, 10).split("-")
+            let str = arr[0] + "." + arr[1] + "." + arr[2]
+
+            return str
         }
     </script>
 

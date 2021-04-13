@@ -38,6 +38,7 @@ namespace PersonalAccount.Models
             {
                 file.CopyTo(fileStream);
             }
+            LocalDB.WriteDate(path, DateTime.Now);
         }
     }
 }

@@ -29,11 +29,11 @@ namespace PersonalAccount.Controllers
 
         public AccountController()
         {
-            for(int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 100; i++)
             {
                 students.Add(new Student(
-                    $"Тест{i}", $"Тестов{i}", $"Тестович{i}", new DateTime(2001,10,10), "Мужской", "Россия", "МГУТУ",
-                        new Passport("1234567890"), 
+                    $"Тест{i}", $"Тестов{i}", $"Тестович{i}", new DateTime(2001, 10, 10), "Мужской", "Россия", "МГУТУ",
+                        new Passport("1234567890"),
                         new Visa(0987654321, new DateTime(18, 2, 3), new DateTime(22, 2, 3)),
                         new Contract(176453273, new DateTime(2010, 2, 1))
                     ));
@@ -43,7 +43,7 @@ namespace PersonalAccount.Controllers
         //[Authorize]
         public ViewResult Students()
         {
-            return  View(students);
+            return View(students);
         }
 
         [HttpPost]
@@ -77,7 +77,7 @@ namespace PersonalAccount.Controllers
         [HttpGet]
         public async Task<FileResult> DownloadPassport()
         {
-             return await DownloadAsync("wwwroot/Data/Documents/Passports/Паспорт.pdf", "Паспорт.pdf");
+            return await DownloadAsync("wwwroot/Data/Documents/Passports/Паспорт.pdf", "Паспорт.pdf");
         }
 
         [Authorize]
@@ -99,7 +99,7 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadPassport(IFormFile file, int studentId)
         {
-            if (file != null)
+            if (file != null && file.ContentType == "application/pdf")
             {
                 FileUploader.UploadPassport(file, studentId);
             }
@@ -109,7 +109,7 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadVisa(IFormFile file, int studentId)
         {
-            if (file != null)
+            if (file != null && file.ContentType == "application/pdf")
             {
                 FileUploader.UploadVisa(file, studentId);
             }
@@ -119,10 +119,44 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadContract(IFormFile file, int studentId)
         {
-            if (file != null)
+            if (file != null && file.ContentType == "application/pdf")
             {
                 FileUploader.UploadContract(file, studentId);
             }
+        }
+
+        //[Authorize]
+        [HttpGet]
+        public string[] GetUploadingDates(int studentId)
+        {
+            var dates =  new string[]
+            {
+                DocumentInfo.GetPassportUploadingDate(studentId),
+                DocumentInfo.GetVisaUploadingDate(studentId),
+                DocumentInfo.GetContractUploadingDate(studentId)
+            };
+            return dates;
+        }
+
+        //[Authorize]
+        [HttpGet]
+        public string GetUploadingPassportDate(int studentId)
+        {
+            return DocumentInfo.GetPassportUploadingDate(studentId);
+        }
+
+        //[Authorize]
+        [HttpGet]
+        public string GetVisaUploadingDate(int studentId)
+        {
+            return DocumentInfo.GetVisaUploadingDate(studentId);
+        }
+
+        //[Authorize]
+        [HttpGet]
+        public string GetContractUploadingDate(int studentId)
+        {
+            return DocumentInfo.GetContractUploadingDate(studentId);
         }
 
         [Authorize]
