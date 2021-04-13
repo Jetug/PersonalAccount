@@ -38,7 +38,7 @@ namespace PersonalAccount.Models
             {
                 text = reader.ReadToEnd();
             }
-            string dataPattern = @".{19}";
+            string dataPattern = @".*";
             string pattern = fileName +  @"\" + separator + dataPattern;
 
             Regex regex = new(pattern);

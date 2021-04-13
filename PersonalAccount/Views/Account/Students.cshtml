@@ -278,120 +278,93 @@
                     <h5 class="modal-title">Данные студента</h5>
                 </div>
                 <div class="modal-body">
-                    <!--<div>-->
-                    @*<p>Номер</p>
-                        <p id="m_id"></p>*@
+                    <form id="editingForm">
+                        <div>
+                            <!--     pass file       -->
+                            <h4 align="left"><i>Паспорт</i></h4>
+                            <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
 
-                    <!--<p>Имя</p>
-                    <input id="name" type="text" class="form-control" align="right" />
+                            <div class="DownLoadPass">
+                                <input id="passFile" type="file" name="file" />
+                                <input id="passPostBtn" type="button" value="Загрузить" />
 
-                    <p>Фамилия</p>
-                    <input id="surname" type="text" class="form-control" align="right" />
-
-                    <p>Отчество</p>
-                    <input id="patr" type="text" class="form-control" align="right" />
-
-                    <p>Страна</p>
-                    <input id="country" type="text" class="form-control" align="right" />
-
-                    <p>Дата рождения</p>
-                    <input id="birthDate" type="date" class="form-control align=" right"" />
-
-                    <p>Пол</p>
-                    <select id="sex" class="form-control" align="right">
-                        <option>Мужской</option>
-                        <option>Женский</option>
-                    </select>
-
-                    <p>Вуз</p>
-                    <input id="inst" type="text" class="form-control" />
-                    </div>
-                    <br />-->
-                    <div>
-                        <!--     pass file       -->
-                        <h4 align="left"><i>Паспорт</i></h4>
-                        <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-
-                        <div class="DownLoadPass">
-                            <input id="passFile" type="file" name="file" />
-                            <input id="passPostBtn" type="button" value="Загрузить" />
-
-                            <small id="passportUploadDate"></small>
-                        </div>
-                        <table id="Passport">
-                            <tbody>
-                            <thead>
-                                <tr>
-                                    <th scope="row">Номер:</th>
-                                    <td><input id="d_pass" type="text" class="form-control" /></td>
-                                </tr>
-                                <tr>
-                                    <th scope="col">Дата выдачи: </th>
-                                    <td><input id="passDate" type="date" class="form-control" /></td>
-                                </tr>
-                            </thead>
-                        </table>
-
-                        <!--     visa file       -->
-                        <div class="line">
-                            <h4 align=" left"><i>Виза</i></h4>
-                            <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-
-                            <div class="DownLoadVisa">
-                                <input id="visaFile" type="file" name="file" />
-                                <input id="visaPostBtn" type="button" value="Загрузить" />
-
-                                <small id="visaUploadDate"></small>
+                                <small id="passportUploadDate"></small>
                             </div>
-
-                            <table id="Visa">
+                            <table id="Passport">
                                 <tbody>
                                 <thead>
                                     <tr>
                                         <th scope="row">Номер:</th>
-                                        <td><input id="d_visa" type="text" class="form-control" /></td>
+                                        <td><input id="d_pass" type="text" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <th scope="col">Дата выдачи: </th>
-                                        <td><input id="visaStartDate" type="date" class="form-control" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Дата окончания: </th>
-                                        <td><input id="visaEndDate" type="date" class="form-control" /></td>
+                                        <td><input id="passDate" type="date" class="form-control" /></td>
                                     </tr>
                                 </thead>
                             </table>
 
-
-                            <!--     Договор file       -->
+                            <!--     visa file       -->
                             <div class="line">
-                                <h4 align=" left"><i>Договор</i></h4>
-                                <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                                <h4 align=" left"><i>Виза</i></h4>
+                                <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
 
-                                <div class="DownLoadDogovor">
-                                    <input id="contFile" type="file" name="file" />
-                                    <input id="contPostBtn" type="button" value="Загрузить" />
+                                <div class="DownLoadVisa">
+                                    <input id="visaFile" type="file" name="file" />
+                                    <input id="visaPostBtn" type="button" value="Загрузить" />
 
-                                    <small id="contractUploadDate"></small>
+                                    <small id="visaUploadDate"></small>
                                 </div>
 
-                                <table id="Dogovor">
+                                <table id="Visa">
                                     <tbody>
                                     <thead>
                                         <tr>
                                             <th scope="row">Номер:</th>
-                                            <td><input id="contractNumber" type="text" class="form-control" /></td>
+                                            <td><input id="d_visa" type="text" class="form-control" /></td>
                                         </tr>
                                         <tr>
-                                            <th scope="col">Дата Заключения: </th>
-                                            <td><input id="contractDate" type="date" class="form-control" /> </td>
+                                            <th scope="col">Дата выдачи: </th>
+                                            <td><input id="visaStartDate" type="date" class="form-control" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Дата окончания: </th>
+                                            <td><input id="visaEndDate" type="date" class="form-control" /></td>
                                         </tr>
                                     </thead>
                                 </table>
-                            </div>
-                        </div>
 
-                    </div>
+
+                                <!--     Договор file       -->
+                                <div class="line">
+                                    <h4 align=" left"><i>Договор</i></h4>
+                                    <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+
+                                    <div class="DownLoadDogovor">
+                                        <input id="contFile" type="file" name="file" />
+                                        <input id="contPostBtn" type="button" value="Загрузить" />
+
+                                        <small id="contractUploadDate"></small>
+                                    </div>
+
+                                    <table id="Dogovor">
+                                        <tbody>
+                                        <thead>
+                                            <tr>
+                                                <th scope="row">Номер:</th>
+                                                <td><input id="contractNumber" type="text" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col">Дата Заключения: </th>
+                                                <td><input id="contractDate" type="date" class="form-control" /> </td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button id="btn_save" type="button" class="btn btn-primary">Сохранить</button>
@@ -408,46 +381,17 @@
             $('#sTable').DataTable();
         });
 
-        //$(function () {
-        //    $('#t_student').on('click', '.doclink', function () {
-
-        //        var authWindow = new bootstrap.Modal(document.getElementById('modal_auth'))
-        //        authWindow.show()
-
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "/Account/GetInfo",
-        //            data: { "id": $(this).find('id').html() - 1 },
-        //            success: function (student) {
-
-        //            },
-        //        });
-
-        //        $.ajax({
-        //            type: "GET",
-        //            url: "/Account/GetUploadingDates",
-        //            data: { "id": $(this).find('id').html() - 1 },
-        //            success: function (student) {
-
-        //            },
-        //        });
-        //    });
-        //});
-
-
-
-
-
+        $("#modal_edit").on("hidden.bs.modal", function () {
+            $("#editingForm")[0].reset()
+        });
 
         $(function () {
             $('#t_student').on('click', '.rowlink', function () {
 
-                clearModal()
+                //clearModal()
 
                 var editWindow = new bootstrap.Modal(document.getElementById('modal_edit'))
                 editWindow.show()
-
-               
 
                 row = $(this);
                 studentId = $(this).find('#id').html() - 1;
@@ -477,35 +421,23 @@
                     },
                 });
 
-                $.ajax({
-                    type: "GET",
-                    url: "/Account/GetUploadingDates",
-                    data: { "studentId": studentId },
-                    success: function (dates) {
-                        const nullFileStr = "Файл не загружен"
-                        $("#passportUploadDate").text(dates[0] != "" ? dates[0] : nullFileStr)
-                        $("#visaUploadDate").text(dates[1] != "" ? dates[1] : nullFileStr)
-                        $("#contractUploadDate").text(dates[2] != "" ? dates[2] : nullFileStr)
-                    },
-                });
+                getDate();
             });
         });
 
-        function clearModal() {
-            $("#d_pass").val("")
-            $("#passDate").val("")
-            $("#d_visa").val("")
-            $("#visaStartDate").val("")
-            $("#visaEndDate").val("")
-            $("#contractNumber").val("")
-            $("#contractDate").val("")
-
-            $("#passportUploadDate").text("q")
-            $("#visaUploadDate").text("w")
-            $("#contractUploadDate").text("e")
+        function getDate() {
+            $.ajax({
+                type: "GET",
+                url: "/Account/GetUploadingDates",
+                data: { "studentId": studentId },
+                success: function (dates) {
+                    const nullFileStr = "Файл не загружен"
+                    $("#passportUploadDate").text(dates[0] != "" ? dates[0] : nullFileStr)
+                    $("#visaUploadDate").text(dates[1] != "" ? dates[1] : nullFileStr)
+                    $("#contractUploadDate").text(dates[2] != "" ? dates[2] : nullFileStr)
+                },
+            });
         }
-
-        var input = document.getElementById('passFile');
 
         $('#btn_save').click(function () {
             $.ajax({
@@ -543,6 +475,9 @@
                 processData: false,
                 dataType: 'json',
                 data: formData,
+                success: function () {
+                    getDate()
+                },
             });
         }
 
@@ -560,6 +495,9 @@
                 processData: false,
                 dataType: 'json',
                 data: formData,
+                success: function () {
+                    getDate()
+                },
             });
         }
 
@@ -576,6 +514,9 @@
                 processData: false,
                 dataType: 'json',
                 data: formData,
+                success: function () {
+                    getDate()
+                },
             });
         }
 
