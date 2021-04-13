@@ -36,3 +36,6 @@ wwwroot/Data/Documents/Contracts/Договор22.pdf|14.04.2021 1:32:28
 wwwroot/Data/Documents/Passports/Паспорт30.pdf|14.04.2021 1:35:12
 wwwroot/Data/Documents/Visas/Виза30.pdf|14.04.2021 1:35:12
 wwwroot/Data/Documents/Contracts/Договор30.pdf|14.04.2021 1:35:13
+wwwroot/Data/Documents/Visas/Виза5.pdf|14.04.2021 01:49:35
+wwwroot/Data/Documents/Contracts/Договор5.pdf|14.04.2021 01:49:58
+wwwroot/Data/Documents/Visas/Виза7.pdf|14.04.2021 01:50:16

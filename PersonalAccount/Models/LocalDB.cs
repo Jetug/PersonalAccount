@@ -16,13 +16,14 @@ namespace PersonalAccount.Models
         public static void WriteDate(string fileName, DateTime date)
         {
             string text = "";
+            const string dateTimeFormat = "dd.MM.yyyy HH:mm:ss";
 
             using (StreamReader reader = new(dbFilePath))
             {
                 text = reader.ReadToEnd();
             }
 
-            text += "\n" + fileName + separator + date.ToString();
+            text += "\n" + fileName + separator + date.ToString(dateTimeFormat);
 
             using (StreamWriter writer = new(dbFilePath, false))
             {
