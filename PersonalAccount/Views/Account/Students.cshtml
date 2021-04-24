@@ -196,7 +196,7 @@
                     <th scope="col">Страна</th>
                     <th scope="col">Дата рождения</th>
                     <th scope="col">Пол</th>
-                    <th scope="col">Вуз</th>
+                    <th scope="col">Институт</th>
                     @*<th scope="col">Документы</th>*@
                 </tr>
             </thead>
@@ -306,10 +306,9 @@
                         <div>
                             <!--     pass file       -->
                             <h4 align="left"><i>Паспорт</i></h4>
-                            <a href="/Account/DownloadPassport"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
-
+                            <img id="downloadPassport" width="50" height="50" src="~/img/pdf_icon.png" align="right">
                             <div class="DownLoadPass">
-                                <input id="passFile" type="file" name="file" />
+                                <input id="passFile" type="file" name="file" accept="application/pdf,image/*"/>
                                 <input id="passPostBtn" type="button" value="Загрузить" />
 
                                 <small id="passportUploadDate"></small>
@@ -331,10 +330,10 @@
                             <!--     visa file       -->
                             <div class="line">
                                 <h4 align=" left"><i>Виза</i></h4>
-                                <a href="/Account/DownloadVisa"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                                <img id="downloadVisa" width="50" height="50" src="~/img/pdf_icon.png" align="right">
 
                                 <div class="DownLoadVisa">
-                                    <input id="visaFile" type="file" name="file" />
+                                    <input id="visaFile" type="file" name="file" accept="application/pdf,image/*"/>
                                     <input id="visaPostBtn" type="button" value="Загрузить" />
 
                                     <small id="visaUploadDate"></small>
@@ -362,10 +361,10 @@
                                 <!--     Договор file       -->
                                 <div class="line">
                                     <h4 align=" left"><i>Договор</i></h4>
-                                    <a href="/Account/DownloadContract"><img width="50" height="50" src="~/img/pdf_icon.png" align="right"></a>
+                                    <img id="downloadContract" width="50" height="50" src="~/img/pdf_icon.png" align="right">
 
                                     <div class="DownLoadDogovor">
-                                        <input id="contFile" type="file" name="file" />
+                                        <input id="contFile" type="file" name="file" accept="application/pdf,image/*"/>
                                         <input id="contPostBtn" type="button" value="Загрузить" />
 
                                         <small id="contractUploadDate"></small>
@@ -462,6 +461,22 @@
                 },
             });
         }
+
+        $("#downloadPassport").click(function () {
+            document.location.href = "/Account/DownloadPassport?studentId=" + studentId
+            //$.ajax({ url: "/Account/DownloadPassport"})
+            //    .success(function (data) {
+            //        location = data
+            //    })
+        })
+
+        $("#downloadVisa").click(function () {
+            document.location.href = "/Account/DownloadVisa?studentId=" + studentId
+        })
+
+        $("#downloadContract").click(function () {
+            document.location.href = "/Account/DownloadContract?studentId=" + studentId
+        })
 
         $('#btn_save').click(function () {
             $.ajax({

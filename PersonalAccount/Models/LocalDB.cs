@@ -9,7 +9,7 @@ namespace PersonalAccount.Models
 {
     public static class LocalDB
     {
-        private const string dbFilePath = @"wwwroot\Data\Documents\FileData.txt";
+        private const string dbFilePath = "wwwroot/Data/Documents/FileData.txt";
         private const string separator = "|";
 
 
