@@ -11,45 +11,49 @@
     <meta name="viewport" content="width=device-width">
     <style>
     </style>
-
+<img class="Logo" src="img/fxD2qADVoRY.jpg">
 </head>
 
-<body>
-    <div class="head__right auth">
-        <input id="authBtn" type="button" class="btn btn-primary" value="Авторизация">
-    </div>
+<body style="background-color: whitesmoke;">
+<div class="container">
+    <p>Более 65 лет
+       В системе высшего образования
+       МГУТУ имени К.Г. Разумовского (ПКУ) был основан в 1953 году как Всесоюзный заочный институт пищевой промышленности. Решение о создании вуза было продиктовано потребностями развития отраслей народного хозяйства – закреплять профессиональные кадры в регионах, на предприятиях.</p>
+</div>
+<div class="head__right auth">
+    <input class="BtnLog" id="authBtn" type="image" src="img/144-1442668_big-image-exit-png.png"> 
+</div>
 
-    <a href="/Account/Students">
-        <input type="button" class="btn btn-primary" value="Info Page">
-    </a>
+<a href="/Account/Students">
+    <input type="button" class="btnStundents" value="StudentsUSA">
+</a>
 
 
-
-    <div id="modal_auth" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Авторизация</h5>
-                </div>
-                <div class="modal-body">
-                    <input type="text" name="login" class="form-control"
-                           id="login" placeholder="Введите Логин">
-                    <br class="form-group">
-                    <input type="password" name="password" class="form-control"
-                           id="password" placeholder="Введите Пароль">
-                    <br />
-                    <p id="l_result"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button id="btn_login" type="button" class="btn btn-primary">Вход</button>
-                </div>
+<div id="modal_auth" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Авторизация</h5>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="login" class="form-control"
+                       id="login" placeholder="Введите Логин">
+                <br class="form-group">
+                <input type="password" name="password" class="form-control"
+                       id="password" placeholder="Введите Пароль">
+                <br/>
+                <p id="l_result"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button id="btn_login" type="button" class="btn btn-primary">Вход</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <script>
+<script>
         let authWindow = document.getElementById('fogging')
 
         $('#btn_login').click(function () {
