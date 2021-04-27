@@ -75,31 +75,33 @@ namespace PersonalAccount.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<FileResult> DownloadPassport()
+        public FileResult DownloadPassport(int studentId)
         {
-            return await DownloadAsync("wwwroot/Data/Documents/Passports/Паспорт.pdf", "Паспорт.pdf");
+            var bytes = FileDownloader.DownloadPassport(studentId);
+            return GetFileResult(bytes, "Паспорт.pdf");
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<FileResult> DownloadVisa()
+        public FileResult DownloadVisa(int studentId)
         {
-            return await DownloadAsync("wwwroot/Data/Documents/Visas/Виза.pdf", "Виза.pdf");
+            var bytes = FileDownloader.DownloadVisa(studentId);
+            return GetFileResult(bytes, "Паспорт.pdf");
         }
 
         [Authorize]
         [HttpGet]
-        public async Task<FileResult> DownloadContract()
+        public FileResult DownloadContract(int studentId)
         {
-            return await DownloadAsync("wwwroot/Data/Documents/Contracts/Договор.pdf", "Договор.pdf");
+            var bytes = FileDownloader.DownloadContract(studentId);
+            return GetFileResult(bytes, "Паспорт.pdf");
         }
-
 
         //[Authorize]
         [HttpPost]
         public void UploadPassport(IFormFile file, int studentId)
         {
-            if (file != null && file.ContentType == "application/pdf")
+            if (file != null && isSupportedType(file.ContentType))
             {
                 FileUploader.UploadPassport(file, studentId);
             }
@@ -109,7 +111,7 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadVisa(IFormFile file, int studentId)
         {
-            if (file != null && file.ContentType == "application/pdf")
+            if (file != null && isSupportedType(file.ContentType))
             {
                 FileUploader.UploadVisa(file, studentId);
             }
@@ -119,7 +121,7 @@ namespace PersonalAccount.Controllers
         [HttpPost]
         public void UploadContract(IFormFile file, int studentId)
         {
-            if (file != null && file.ContentType == "application/pdf")
+            if (file != null && isSupportedType(file.ContentType))
             {
                 FileUploader.UploadContract(file, studentId);
             }
@@ -167,6 +169,8 @@ namespace PersonalAccount.Controllers
             return true;
         }
 #pragma warning restore CS1998
+
+        private bool isSupportedType(string type) => type == "application/pdf" || type.Substring(0, 5) == "image";
 
         private FileResult GetFileResult(byte[] fileBytes, string name)
         {
