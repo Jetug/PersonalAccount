@@ -11,21 +11,28 @@ namespace PersonalAccount.Models
         public static byte[] DownloadPassport(int studentId)
         {
             string path = $"wwwroot/Data/Documents/Passports/Паспорт{studentId}.pdf";
-            return File.ReadAllBytes(path);
+            return Download(path);
         }
 
         public static byte[] DownloadVisa(int studentId)
         {
             string path = $"wwwroot/Data/Documents/Visas/Виза{studentId}.pdf";
-            return File.ReadAllBytes(path);
+            return Download(path);
         }
 
         public static byte[] DownloadContract(int studentId)
         {
             string path = $"wwwroot/Data/Documents/Contracts/Договор{studentId}.pdf";
-            return File.ReadAllBytes(path);
+            return Download(path);
         }
 
-        
+        static byte[] Download(string path)
+        {
+            if (File.Exists(path))
+            {
+                return File.ReadAllBytes(path);
+            }
+            return new byte[0];
+        }
     }
 }

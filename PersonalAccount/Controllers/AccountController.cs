@@ -40,7 +40,7 @@ namespace PersonalAccount.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         public ViewResult Students()
         {
             return View(students);
@@ -86,7 +86,7 @@ namespace PersonalAccount.Controllers
         public FileResult DownloadVisa(int studentId)
         {
             var bytes = FileDownloader.DownloadVisa(studentId);
-            return GetFileResult(bytes, "Паспорт.pdf");
+            return GetFileResult(bytes, "Виза.pdf");
         }
 
         [Authorize]
@@ -94,10 +94,10 @@ namespace PersonalAccount.Controllers
         public FileResult DownloadContract(int studentId)
         {
             var bytes = FileDownloader.DownloadContract(studentId);
-            return GetFileResult(bytes, "Паспорт.pdf");
+            return GetFileResult(bytes, "Договор.pdf");
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public void UploadPassport(IFormFile file, int studentId)
         {
@@ -107,7 +107,7 @@ namespace PersonalAccount.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public void UploadVisa(IFormFile file, int studentId)
         {
@@ -117,7 +117,7 @@ namespace PersonalAccount.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public void UploadContract(IFormFile file, int studentId)
         {
@@ -127,7 +127,7 @@ namespace PersonalAccount.Controllers
             }
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public string[] GetUploadingDates(int studentId)
         {
@@ -140,21 +140,21 @@ namespace PersonalAccount.Controllers
             return dates;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public string GetUploadingPassportDate(int studentId)
         {
             return DocumentInfo.GetPassportUploadingDate(studentId);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public string GetVisaUploadingDate(int studentId)
         {
             return DocumentInfo.GetVisaUploadingDate(studentId);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public string GetContractUploadingDate(int studentId)
         {
@@ -169,6 +169,12 @@ namespace PersonalAccount.Controllers
             return true;
         }
 #pragma warning restore CS1998
+
+        [HttpGet]
+        public string Test(int test)
+        {
+            return "AbobA";
+        }
 
         private bool isSupportedType(string type) => type == "application/pdf" || type.Substring(0, 5) == "image";
 

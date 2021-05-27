@@ -42,69 +42,87 @@ namespace PersonalAccount.Models
                 {
                     file.CopyTo(fileStream);
                 }
+                LocalDB.WriteDate(path, DateTime.Now);
             }
             else
             {
-                Document document = new Document(PageSize.A4, 25, 25, 25, 25);
-                using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+                Document document;
+                document = new Document(PageSize.A4, 25, 25, 25, 25);
+                if (document == null)
                 {
-                    PdfWriter.GetInstance(document, stream);
-                    document.Open();
-                    //using (var imageStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    document = new Document(PageSize.A4, 25, 25, 25, 25);
+                }
+                if (document != null)
+                {
+                    using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
                     {
-                        var page = Image.GetInstance(GetByteArray(file));
-
-                        // Размеры изображения
-                        float width = page.Width;
-                        float height = page.Height;
-
-                        if (width < height)
+                        try
                         {
-                            // Книжная
-                            document.SetPageSize(PageSize.A4);
+                            PdfWriter.GetInstance(document, stream);
                         }
-                        else
+                        catch(NullReferenceException) { }
+                        document.Open();
+                        //using (var imageStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                         {
-                            // Альбомная
-                            document.SetPageSize(PageSize.A4.Rotate());
+                            var page = Image.GetInstance(GetByteArray(file));
+
+                            // Размеры изображения
+                            float width = page.Width;
+                            float height = page.Height;
+
+                            if (width < height)
+                            {
+                                // Книжная
+                                document.SetPageSize(PageSize.A4);
+                            }
+                            else
+                            {
+                                // Альбомная
+                                document.SetPageSize(PageSize.A4.Rotate());
+                            }
+
+                            document.NewPage();
+
+                            // Масштабируем размеры изображения под параметры страницы
+                            if (width < height)
+                            {
+                                // Для книжной ориентации
+                                if (page.Height > PageSize.A4.Height - 25)
+                                {
+                                    page.ScaleToFit(PageSize.A4.Width - 25, PageSize.A4.Height - 25);
+                                }
+                                else if (page.Width > PageSize.A4.Width - 25)
+                                {
+                                    page.ScaleToFit(PageSize.A4.Width - 25, PageSize.A4.Height - 25);
+                                }
+                            }
+                            else
+                            {
+                                // Для альбомной ориентации
+                                if (page.Height > PageSize.A4.Height - 25)
+                                {
+                                    page.ScaleToFit(PageSize.A4.Height - 25, PageSize.A4.Width - 25);
+                                }
+                                else if (page.Width > PageSize.A4.Width - 25)
+                                {
+                                    page.ScaleToFit(PageSize.A4.Height - 25, PageSize.A4.Width - 25);
+                                }
+                            }
+                            // Добавляем страницу в документ
+                            page.Alignment = Image.ALIGN_MIDDLE;
+
+                            document.Add(page);
                         }
-
-                        document.NewPage();
-
-                        // Масштабируем размеры изображения под параметры страницы
-                        if (width < height)
+                        try
                         {
-                            // Для книжной ориентации
-                            if (page.Height > PageSize.A4.Height - 25)
-                            {
-                                page.ScaleToFit(PageSize.A4.Width - 25, PageSize.A4.Height - 25);
-                            }
-                            else if (page.Width > PageSize.A4.Width - 25)
-                            {
-                                page.ScaleToFit(PageSize.A4.Width - 25, PageSize.A4.Height - 25);
-                            }
+                            document.Close();
                         }
-                        else
-                        {
-                            // Для альбомной ориентации
-                            if (page.Height > PageSize.A4.Height - 25)
-                            {
-                                page.ScaleToFit(PageSize.A4.Height - 25, PageSize.A4.Width - 25);
-                            }
-                            else if (page.Width > PageSize.A4.Width - 25)
-                            {
-                                page.ScaleToFit(PageSize.A4.Height - 25, PageSize.A4.Width - 25);
-                            }
-                        }
-                        // Добавляем страницу в документ
-                        page.Alignment = Image.ALIGN_MIDDLE;
-
-                        document.Add(page);
+                        catch(NullReferenceException) { }
+                        LocalDB.WriteDate(path, DateTime.Now);
                     }
-                    document.Close();
                 }
             }
-            LocalDB.WriteDate(path, DateTime.Now);
+            
         }
 
 

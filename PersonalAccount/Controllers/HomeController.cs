@@ -20,12 +20,23 @@ namespace PersonalAccount.Data.Models
         }
 
         [HttpPost]
+        public async Task<bool> GotoStudents()
+        {
+#if DEBUG
+            await AuthenticateAsync("1");
+            return true;
+#endif
+#if !DEBUG
+            return false;
+#endif
+        }
+
+        [HttpPost]
         public async Task<bool> Login(string login, string password)
         {
             if (login == "1" && password == "2")
             {
-                await Authenticate(login); // аутентификация
-
+                await AuthenticateAsync(login); // аутентификация
                 return true;
             }
             return false;
@@ -40,10 +51,10 @@ namespace PersonalAccount.Data.Models
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
-        private async Task Authenticate(string userName)
+        private async Task AuthenticateAsync(string userName)
         {
             // создаем один claim
             var claims = new List<Claim>
@@ -54,6 +65,19 @@ namespace PersonalAccount.Data.Models
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        private void Authenticate(string userName)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
     }
 }
