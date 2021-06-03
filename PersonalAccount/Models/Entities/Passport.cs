@@ -13,6 +13,6 @@ namespace PersonalAccount.Models.Entities
         }
 
         public string Number { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = new(2000, 11, 12);
     }
 }
